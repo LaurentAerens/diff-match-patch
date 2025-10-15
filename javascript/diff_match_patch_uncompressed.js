@@ -1415,8 +1415,9 @@ diff_match_patch.prototype.diff_prettyHtml = function (diffs) {
   var pattern_lt = /</g;
   var pattern_gt = />/g;
   var pattern_para = /\n/g;
-  var pattern_space = /^ | $/g;
-  
+  var pattern_tab = /\t/g;
+  var pattern_space = / /g;
+
   for (var x = 0; x < diffs.length; x++) {
     var op = diffs[x][0];    // Operation (insert, delete, equal)
     var data = diffs[x][1];  // Text of change.
@@ -1425,6 +1426,7 @@ diff_match_patch.prototype.diff_prettyHtml = function (diffs) {
       .replace(pattern_lt, '&lt;')
       .replace(pattern_gt, '&gt;')
       .replace(pattern_para, '&para;<br>')
+      .replace(pattern_tab, '&emsp;')
       .replace(pattern_space, '&nbsp;');
     switch (op) {
       case DIFF_INSERT:
